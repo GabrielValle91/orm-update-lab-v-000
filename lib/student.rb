@@ -7,11 +7,23 @@ class Student
   # Remember, you can access your database connection anywhere in this class
   #  with DB[:conn]
 
-  def initialize(id = nil, name, grade)
+  def initialize(name, grade, id = nil)
     @id = id
     @name = name
     @grade = grade
     @@all << self
+  end
+
+  def save
+    if self.id
+      self.update
+    else
+      sql = <<-SQL
+        INSERT INTO students (name, grade)
+        VALUES (?, ?)
+      SQL
+      DB[:conn].execute(sql,self.name, self.grade)
+    end
   end
 
   def self.create_table
