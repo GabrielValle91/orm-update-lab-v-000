@@ -34,6 +34,15 @@ class Student
     DB[:conn].execute(sql,self.name, self.grade, self.id)
   end 
 
+  def self.create(name, grade)
+    new_student = self.new(name, grade)
+    new_student.save
+  end
+
+  def self.new_from_db(array)
+    self.new(array[1],array[2],arrary[0])
+  end
+
   def self.create_table
     sql = <<-SQL
       CREATE TABLE IF NOT EXISTS students (
