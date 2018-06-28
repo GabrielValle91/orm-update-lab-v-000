@@ -11,7 +11,7 @@ class Student
     @id = id
     @name = name
     @grade = grade
-    @@all << self.
+    @@all << self
   end
 
 end
